@@ -42,9 +42,21 @@ export class HeroDetailComponent implements OnInit {
 
     this.heroService.getHero(id)
       .subscribe((hero) => {
-        this.hero = hero;
-        this.messageService.add(`HeroService: Fetching hero with id=${id}`);
+        // console.log(hero);
+        if(hero !== undefined) {
+          this.hero = hero;
+          this.messageService.add(`HeroService: Fetching hero with id=${id}`);
+        }
+        else {
+          this.messageService.add(`HeroService: No hero found with id=${id}`);
+        }
       });
+  }
+
+  save() {
+    const id = +this.route.snapshot.paramMap.get("id");
+    this.heroService.updateHero(id);
+    this.messageService.add(`HeroService: Updated hero with id=${id}`);
   }
 
 }
