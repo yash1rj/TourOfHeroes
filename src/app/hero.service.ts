@@ -21,4 +21,14 @@ export class HeroService {
     this.messageService.add(`HeroService: Started fetching hero with id=${id}`);
     return of(HEROES.find(hero => hero.id === id));
   }
+
+  updateHero(id: number): void {
+    this.messageService.add(`HeroService: Started updating hero with id=${id}`);
+    HEROES.map((hero, i) => {
+      if(hero.id === id) {
+        // console.log(hero, HEROES);
+        HEROES[i] = hero;
+      }
+    });
+  }
 }
